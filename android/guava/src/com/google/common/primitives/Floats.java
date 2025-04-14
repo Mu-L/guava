@@ -66,7 +66,6 @@ public final class Floats extends FloatsMethodsForWeb {
    * @param value a primitive {@code float} value
    * @return a hash code for the value
    */
-  @SuppressWarnings("Java7ApiChecker") // What we actually want to test is Android: b/336133887
   @InlineMe(replacement = "Float.hashCode(value)")
   public static int hashCode(float value) {
     return Float.hashCode(value);
@@ -683,7 +682,7 @@ public final class Floats extends FloatsMethodsForWeb {
     public int hashCode() {
       int result = 1;
       for (int i = start; i < end; i++) {
-        result = 31 * result + Floats.hashCode(array[i]);
+        result = 31 * result + Float.hashCode(array[i]);
       }
       return result;
     }

@@ -19,9 +19,9 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.math.DoubleUtils.ensureNonNegative;
 import static com.google.common.math.StatsAccumulator.calculateNewMeanNonFinite;
-import static com.google.common.primitives.Doubles.isFinite;
 import static java.lang.Double.NaN;
 import static java.lang.Double.doubleToLongBits;
+import static java.lang.Double.isFinite;
 import static java.lang.Double.isNaN;
 
 import com.google.common.annotations.GwtIncompatible;
@@ -163,7 +163,6 @@ public final class Stats implements Serializable {
    * @param values a series of values
    * @since 33.4.0 (but since 28.2 in the JRE flavor)
    */
-  @SuppressWarnings("Java7ApiChecker")
   @IgnoreJRERequirement // Users will use this only if they're already using streams.
   public static Stats of(DoubleStream values) {
     return values
@@ -181,7 +180,6 @@ public final class Stats implements Serializable {
    * @param values a series of values
    * @since 33.4.0 (but since 28.2 in the JRE flavor)
    */
-  @SuppressWarnings("Java7ApiChecker")
   @IgnoreJRERequirement // Users will use this only if they're already using streams.
   public static Stats of(IntStream values) {
     return values
@@ -200,7 +198,6 @@ public final class Stats implements Serializable {
    *     cause loss of precision for longs of magnitude over 2^53 (slightly over 9e15))
    * @since 33.4.0 (but since 28.2 in the JRE flavor)
    */
-  @SuppressWarnings("Java7ApiChecker")
   @IgnoreJRERequirement // Users will use this only if they're already using streams.
   public static Stats of(LongStream values) {
     return values
@@ -219,7 +216,6 @@ public final class Stats implements Serializable {
    *
    * @since 33.4.0 (but since 28.2 in the JRE flavor)
    */
-  @SuppressWarnings("Java7ApiChecker")
   @IgnoreJRERequirement // Users will use this only if they're already using streams.
   public static Collector<Number, StatsAccumulator, Stats> toStats() {
     return Collector.of(

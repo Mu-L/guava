@@ -16,6 +16,7 @@ package com.google.common.hash;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
+import static java.lang.Byte.toUnsignedInt;
 import static java.lang.Math.max;
 
 import com.google.common.annotations.Beta;
@@ -326,7 +327,6 @@ public final class BloomFilter<T extends @Nullable Object> implements Predicate<
    * @return a {@code Collector} generating a {@code BloomFilter} of the received elements
    * @since 33.4.0 (but since 23.0 in the JRE flavor)
    */
-  @SuppressWarnings("Java7ApiChecker")
   @IgnoreJRERequirement // Users will use this only if they're already using streams.
   public static <T extends @Nullable Object> Collector<T, ?, BloomFilter<T>> toBloomFilter(
       Funnel<? super T> funnel, long expectedInsertions) {
@@ -355,7 +355,6 @@ public final class BloomFilter<T extends @Nullable Object> implements Predicate<
    * @return a {@code Collector} generating a {@code BloomFilter} of the received elements
    * @since 33.4.0 (but since 23.0 in the JRE flavor)
    */
-  @SuppressWarnings("Java7ApiChecker")
   @IgnoreJRERequirement // Users will use this only if they're already using streams.
   public static <T extends @Nullable Object> Collector<T, ?, BloomFilter<T>> toBloomFilter(
       Funnel<? super T> funnel, long expectedInsertions, double fpp) {
@@ -620,7 +619,7 @@ public final class BloomFilter<T extends @Nullable Object> implements Predicate<
       // add non-stateless strategies (for which we've reserved negative ordinals; see
       // Strategy.ordinal()).
       strategyOrdinal = din.readByte();
-      numHashFunctions = UnsignedBytes.toInt(din.readByte());
+      numHashFunctions = toUnsignedInt(din.readByte());
       dataLength = din.readInt();
 
       /*
